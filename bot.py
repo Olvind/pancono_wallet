@@ -14,7 +14,7 @@ bot = Bot(token=8463228962:AAGtElNYpkZb3pt4RM_V78VYaoWgjOOQeYY)   # ✅ token lo
 dp = Dispatcher(bot)
 
 # Replace with your Telegram User ID
-ADMIN_ID = 123456789  
+ADMIN_ID = 7194082974  
 
 AIRDROP_AMOUNT = 0.0005
 AIRDROP_DURATION_HOURS = 24
