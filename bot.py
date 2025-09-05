@@ -10,11 +10,17 @@ from referral import add_referral
 
 logging.basicConfig(level=logging.INFO)
 
-bot = Bot(token=8463228962:AAGtElNYpkZb3pt4RM_V78VYaoWgjOOQeYY)   # ✅ token loaded safely from config.py
+import os
+from aiogram import Bot, Dispatcher
+
+BOT_TOKEN = os.getenv("BOT_TOKEN")
+ADMIN_ID = int(os.getenv("ADMIN_ID"))
+
+bot = Bot(token=BOT_TOKEN)
 dp = Dispatcher(bot)
 
-# Replace with your Telegram User ID
-ADMIN_ID = 7194082974  
+
+
 
 AIRDROP_AMOUNT = 0.0005
 AIRDROP_DURATION_HOURS = 24
