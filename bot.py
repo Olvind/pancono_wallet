@@ -6,6 +6,8 @@ from db import get_user, update_user
 from wallet import import_wallet, export_wallet
 from airdrop import process_airdrop
 from referral import add_referral
+from config import ADMIN_ID
+from db import load_db
 
 logging.basicConfig(level=logging.INFO)
 bot = Bot(token=BOT_TOKEN)
@@ -89,6 +91,31 @@ async def export(message: types.Message):
         await message.answer(f"🔑 Your private key:\n`{key}`", parse_mode="Markdown")
     else:
         await message.answer("⚠️ No wallet found to export.")
+        
+
+# Admin stats
+@dp.message_handler(commands=["stats"])
+async def stats(message: types.Message):
+    if str(message.from_user.id) != str(ADMIN_ID):
+        await message.answer("🚫 You are not authorized to view stats.")
+        return
+
+    db = load_db()
+    users = db["users"]
+    total_users = len(users)
+
+    # Build referral summary
+    leaderboard = []
+    for uid, data in users.items():
+        leaderboard.append((uid, len(data["referrals"])))
+    leaderboard.sort(key=lambda x: x[1], reverse=True)
+
+    text = f"📊 *Pancono Stats*\n\n👥 Total Users: {total_users}\n\n🏆 *Top Referrers:*\n"
+    for uid, count in leaderboard[:10]:  # show top 10
+        text += f"• User {uid}: {count} referrals\n"
+
+    await message.answer(text, parse_mode="Markdown")
+
 
 if __name__ == "__main__":
     executor.start_polling(dp, skip_updates=True)
