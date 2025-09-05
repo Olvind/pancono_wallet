@@ -2,7 +2,8 @@ import logging
 import time
 import datetime
 import asyncio
-from aiogram import Bot, Dispatcher, executor, types
+import os
+from aiogram import Bot, Dispatcher
 from config import BOT_TOKEN, ADMIN_ID
 from db import get_user, update_user, load_db
 from wallet import import_wallet, export_wallet, import_private_key
@@ -10,8 +11,7 @@ from referral import add_referral
 
 logging.basicConfig(level=logging.INFO)
 
-import os
-from aiogram import Bot, Dispatcher
+
 
 BOT_TOKEN = os.getenv("BOT_TOKEN")
 ADMIN_ID = int(os.getenv("ADMIN_ID"))
