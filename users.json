@@ -1,0 +1,8 @@
+{
+  "reserved_wallets": {
+    "0xABC123": { "private_key": "privkey2000", "balance": 2000 },
+    "0xDEF456": { "private_key": "privkey500", "balance": 500 },
+    "0xGHI789": { "private_key": "privkey12", "balance": 12 }
+  },
+  "users": {}
+}
